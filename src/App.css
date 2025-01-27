@@ -1,3 +1,7 @@
+body input {
+  color: rgb(15, 14, 14);
+}
+
 header {
   position: relative;
   background-image: url(./assets/Kitchen.jpg);
@@ -57,7 +61,7 @@ footer {
   grid-template-columns: repeat(auto-fit, 300px);
   gap: 15px;
   justify-content: center;
-  background-color: rgba(33, 33, 43, 1);
+  padding: 16px;
 }
 
 /* Positioning for the pop-up overlay */
@@ -76,13 +80,19 @@ footer {
 
 /* Styling for the pop-up content */
 .popup-content {
-  background-color: rgba(33, 33, 43, 1);
+  background-color: rgba(43, 58, 79, 1);
   padding: 20px;
   border-radius: 10px;
   text-align: center;
   width: 500px;
   height: 500px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  gap: 15px;
+  position: relative;
+  color: white;
 }
 
 /* Button to close the pop-up */
@@ -90,7 +100,7 @@ footer {
   background-color: #2b3a4f;
   color: white;
   border: none;
-  padding: 10px;
+  padding: 10px 20px;
   border-radius: 5px;
   cursor: pointer;
 }
@@ -105,4 +115,17 @@ footer {
 
 .blue:hover {
   background-color: blue;
+}
+
+.burly:hover {
+  background-color: burlywood;
+}
+
+.explore {
+  background-color: rgba(0, 0, 0, 0.4);
+  position: absolute;
+  bottom: 60px;
+  color: white;
+  font-style: italic;
+  scroll-behavior: smooth;
 }
