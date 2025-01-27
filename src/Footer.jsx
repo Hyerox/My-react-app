@@ -1,5 +1,5 @@
 import Instagram from '@mui/icons-material/Instagram'
-import Linkedin from '@mui/icons-material/Linkedin'
+import LinkedIn from '@mui/icons-material/LinkedIn'
 import Facebook from '@mui/icons-material/Facebook'
 import X from '@mui/icons-material/X'
 import { Link, useLocation } from 'react-router-dom'
@@ -69,7 +69,7 @@ function Footer({ setIsPopupOpen, isPopupOpen, togglePopup, resetSearchBar }) {
             <Instagram />
           </a>
           <a href='https://linkedin.com' className='burly'>
-            <Linkedin />
+            <LinkedIn />
           </a>
           <a href='https://facebook.com' className='burly'>
             <Facebook />
