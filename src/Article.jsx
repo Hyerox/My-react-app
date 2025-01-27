@@ -14,14 +14,15 @@ function Article() {
   return (
     <main className='bg-[rgba(33,33,43,1)] text-white'>
       <article className='flex justify-center py-4 text-white' key={recipe.id}>
-        <div className='CardContainer border-black border-2 rounded w-64 text-center flex flex-col relative'>
+        <div className='CardContainer border-black border-2 rounded-sm w-64 text-center flex flex-col relative'>
           <h2 className='p-2'>{recipe.title}</h2>
           <img
             src={recipe.imageUrl || 'placeholder-image.jpg'}
             alt={recipe.title}
             className='w-full h-[252px] object-cover'
           />
-          <p className='pb-4'>{recipe.description}</p>
+          <p className='pb-4'>Ingrédients : {recipe.ingredients}</p>
+          <p className='pb-4'>Instructions : {recipe.instructions}</p>
           <div className='mt-auto flex justify-end items-center'>
             <h2 className='text-sm items-center'>Difficulté</h2>
             <h2>

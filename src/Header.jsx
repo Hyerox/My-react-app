@@ -48,7 +48,7 @@ function Header({ togglePopup, resetSearchBar }) {
         <button
           href='#articles'
           onClick={(e) => scrollToSection(e, 'articles')}
-          className='explore rounded-md p-2'
+          className='explore rounded-md p-2 hover:cursor-pointer'
         >
           Explorez la passion de nos recettes
         </button>

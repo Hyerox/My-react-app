@@ -13,11 +13,12 @@ function App() {
   const [searchTerm, setSearchTerm] = useState('')
   const [selectedCategory, setSelectedCategory] = useState('')
   const [recipes, setRecipes] = useState(Recipe)
+  const [userRecipes, setUserRecipes] = useState([])
 
   const togglePopup = () => setIsPopupOpen(!isPopupOpen)
 
   const addRecipe = (newRecipe) => {
-    setRecipes((prev) => [...prev, { ...newRecipe, id: prev.length + 1 }])
+    setUserRecipes((prev) => [...prev, { ...newRecipe, id: prev.length + 1 }])
   }
 
   const uniqueCategories = [...new Set(recipes.map((r) => r.category))]
@@ -25,6 +26,10 @@ function App() {
   const resetSearchBar = () => {
     setSearchTerm('')
     setSelectedCategory('')
+  }
+
+  const removeRecipe = (index) => {
+    setUserRecipes((prev) => prev.filter((_, i) => i !== index))
   }
 
   return (
@@ -50,7 +55,8 @@ function App() {
         isPopupOpen={isPopupOpen}
         togglePopup={togglePopup}
         addRecipe={addRecipe}
-        existingRecipes={recipes.slice(-5)} // Dernières 5 recettes ajoutées
+        userRecipes={userRecipes}
+        removeRecipe={removeRecipe}
       />
       <Footer togglePopup={togglePopup} resetSearchBar={resetSearchBar} />
     </>

@@ -89,20 +89,21 @@ footer {
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
   display: flex;
   flex-direction: column;
-  overflow: hidden;
-  gap: 15px;
+  overflow-y: auto;
+  gap: 1px;
   position: relative;
   color: white;
+  scrollbar-width: thin;
 }
 
 /* Button to close the pop-up */
 .popup-content button {
-  background-color: #2b3a4f;
   color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
+  padding: 8px;
+  border-radius: 10px;
   cursor: pointer;
+  width: 200px;
+  margin: 0 auto;
 }
 
 .green:hover {

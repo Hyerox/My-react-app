@@ -28,14 +28,14 @@ function Articles({
         <input
           type='text'
           placeholder='Recherche de recette'
-          className='p-1 rounded-lg text-center text-black'
+          className='p-1 rounded-lg text-center text-black bg-white'
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
 
         {/* FILTRE DE CATÉGORIE */}
         <select
-          className='text-black p-1 rounded-lg'
+          className='text-black p-1 rounded-lg bg-white'
           value={selectedCategory}
           onChange={(e) => setSelectedCategory(e.target.value)}
         >
@@ -53,7 +53,7 @@ function Articles({
         {/* AFFICHAGE DES RECETTES */}
         {filteredRecipes.map((recipe) => (
           <article className='grid justify-center' key={recipe.id}>
-            <div className='CardContainer border-black border-2 rounded w-64 text-center flex flex-col relative'>
+            <div className='CardContainer border-black border-2 rounded-sm w-64 text-center flex flex-col relative'>
               <h2 className='p-2'>{recipe.title}</h2>
               <img
                 src={recipe.imageUrl || 'placeholder-image.jpg'}
