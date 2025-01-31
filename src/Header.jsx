@@ -42,17 +42,6 @@ function Header({ togglePopup, resetSearchBar }) {
           </button>
         </div>
       </nav>
-
-      {/* BUTTON QUI FAIT DEFILER VERS LES ARTICLES */}
-      <div className='flex justify-center'>
-        <button
-          href='#articles'
-          onClick={(e) => scrollToSection(e, 'articles')}
-          className='explore rounded-md p-2 hover:cursor-pointer'
-        >
-          Explorez la passion de nos recettes
-        </button>
-      </div>
     </header>
   )
 }

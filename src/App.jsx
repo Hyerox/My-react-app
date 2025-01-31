@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, useLocation } from 'react-router-dom'
 import './App.css'
 import Header from './Header.jsx'
 import Footer from './Footer.jsx'
@@ -12,8 +12,13 @@ function App() {
   const [isPopupOpen, setIsPopupOpen] = useState(false)
   const [searchTerm, setSearchTerm] = useState('')
   const [selectedCategory, setSelectedCategory] = useState('')
+  const [selectedDifficulty, setSelectedDifficulty] = useState('')
   const [recipes, setRecipes] = useState(Recipe)
   const [userRecipes, setUserRecipes] = useState([])
+  console.log('userRecipes:', userRecipes)
+  const [showExploreButton, setShowExploreButton] = useState(true) // Nouvel état
+
+  const location = useLocation() // Pour surveiller les changements de route
 
   const togglePopup = () => setIsPopupOpen(!isPopupOpen)
 
@@ -22,6 +27,9 @@ function App() {
   }
 
   const uniqueCategories = [...new Set(recipes.map((r) => r.category))]
+  const uniqueDifficulties = [
+    ...new Set(recipes.map((r) => r.difficulty)),
+  ].sort()
 
   const resetSearchBar = () => {
     setSearchTerm('')
@@ -31,6 +39,15 @@ function App() {
   const removeRecipe = (index) => {
     setUserRecipes((prev) => prev.filter((_, i) => i !== index))
   }
+
+  // Surveiller le changement d'URL pour contrôler le bouton "Explorez"
+  React.useEffect(() => {
+    if (location.pathname === '/') {
+      setShowExploreButton(true)
+    } else {
+      setShowExploreButton(false)
+    }
+  }, [location.pathname])
 
   return (
     <>
@@ -43,8 +60,11 @@ function App() {
               searchTerm={searchTerm}
               setSearchTerm={setSearchTerm}
               selectedCategory={selectedCategory}
+              selectedDifficulty={selectedDifficulty}
               setSelectedCategory={setSelectedCategory}
+              setSelectedDifficulty={setSelectedDifficulty}
               uniqueCategories={uniqueCategories}
+              uniqueDifficulties={uniqueDifficulties}
             />
           }
         />
@@ -58,6 +78,23 @@ function App() {
         userRecipes={userRecipes}
         removeRecipe={removeRecipe}
       />
+      {showExploreButton && (
+        <div className='flex justify-center'>
+          <button
+            onClick={(e) => {
+              e.preventDefault()
+              const targetElement = document.getElementById('articles')
+              window.scrollTo({
+                top: targetElement.offsetTop - 60,
+                behavior: 'smooth',
+              })
+            }}
+            className='explore rounded-md p-2 hover:cursor-pointer'
+          >
+            Explorez la passion de nos recettes
+          </button>
+        </div>
+      )}
       <Footer togglePopup={togglePopup} resetSearchBar={resetSearchBar} />
     </>
   )

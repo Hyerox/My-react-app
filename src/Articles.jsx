@@ -7,10 +7,13 @@ function Articles({
   searchTerm,
   setSearchTerm,
   selectedCategory,
+  selectedDifficulty,
+  setSelectedDifficulty,
   setSelectedCategory,
   uniqueCategories,
+  uniqueDifficulties,
 }) {
-  // Filtrer les recettes en fonction de la recherche et de la catégorie
+  // Filtrer les recettes en fonction de la recherche, de la catégorie et de la difficulté
   const filteredRecipes = Recipe.filter((r) => {
     const matchesSearch = r.title
       .toLowerCase()
@@ -18,7 +21,16 @@ function Articles({
     const matchesCategory = selectedCategory
       ? r.category === selectedCategory
       : true
-    return matchesSearch && matchesCategory
+
+    // Filtrage basé sur la difficulté, avec conversion de selectedDifficulty en nombre
+    const matchesDifficulty = selectedDifficulty
+      ? r.difficulty === Number(selectedDifficulty) // Conversion en nombre pour la comparaison
+      : true
+
+    // Log pour voir ce qui est filtré
+    console.log(r.title, matchesSearch, matchesCategory, matchesDifficulty)
+
+    return matchesSearch && matchesCategory && matchesDifficulty
   })
 
   return (
@@ -44,6 +56,20 @@ function Articles({
           {uniqueCategories.map((category, index) => (
             <option key={index} value={category}>
               {category}
+            </option>
+          ))}
+        </select>
+
+        {/* FILTRE DE DIFFICULTE */}
+        <select
+          className='text-black p-1 rounded-lg bg-white'
+          value={selectedDifficulty}
+          onChange={(e) => setSelectedDifficulty(e.target.value)}
+        >
+          <option value=''>Toutes les difficultés</option>
+          {uniqueDifficulties.map((difficulty, index) => (
+            <option key={index} value={difficulty}>
+              {difficulty}
             </option>
           ))}
         </select>

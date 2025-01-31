@@ -130,3 +130,17 @@ footer {
   font-style: italic;
   scroll-behavior: smooth;
 }
+
+.cadre {
+  border: 20px solid #16161b;
+}
+
+.info {
+  background-color: #1c1c21;
+  padding: 20px;
+}
+
+.break-word {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
