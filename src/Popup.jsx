@@ -7,7 +7,8 @@ function Popup({
   togglePopup,
   addRecipe,
   userRecipes,
-  removeRecipe = () => {},
+  removeRecipe,
+  updateRecipe,
 }) {
   const [newRecipe, setNewRecipe] = useState({
     title: '',
@@ -19,6 +20,7 @@ function Popup({
   const [errorMessage, setErrorMessage] = useState('')
   const [ingredientsList, setIngredientsList] = useState([])
   const [instructionsList, setInstructionsList] = useState([])
+  const [editingIndex, setEditingIndex] = useState(null)
 
   const handleChange = (e) => {
     const { name, value } = e.target
@@ -36,6 +38,7 @@ function Popup({
     setErrorMessage('')
     setIngredientsList([])
     setInstructionsList([])
+    setEditingIndex(null)
   }
 
   const handleAddRecipe = () => {
@@ -58,12 +61,34 @@ function Popup({
       return
     }
 
-    addRecipe({
-      ...newRecipe,
-      ingredients: ingredientsList,
-      instructions: instructionsList,
-    })
+    if (editingIndex !== null) {
+      updateRecipe(editingIndex, {
+        ...newRecipe,
+        ingredients: ingredientsList,
+        instructions: instructionsList,
+      })
+    } else {
+      addRecipe({
+        ...newRecipe,
+        ingredients: ingredientsList,
+        instructions: instructionsList,
+      })
+    }
     resetPopup()
+  }
+
+  const editRecipe = (index) => {
+    const recipe = userRecipes[index]
+    setNewRecipe({
+      title: recipe.title,
+      difficulty: recipe.difficulty,
+      description: recipe.description,
+      ingredients: '',
+      instructions: '',
+    })
+    setIngredientsList(recipe.ingredients)
+    setInstructionsList(recipe.instructions)
+    setEditingIndex(index)
   }
 
   const ajoutListe = (field) => {
@@ -246,7 +271,10 @@ function Popup({
             userRecipes.map((recipe, index) => (
               <div key={index} className='flex items-center rounded-md mb-1'>
                 <p className='text-sm text-start flex-1'>{recipe.title}</p>
-                <ModeEditIcon />
+                <ModeEditIcon
+                  className='cursor-pointer'
+                  onClick={() => editRecipe(index)}
+                />
                 <ClearIcon
                   className='hover:bg-red-500 cursor-pointer'
                   onClick={() => removeRecipe(index)}
